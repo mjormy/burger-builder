@@ -52,7 +52,7 @@ class BurgerBuilder extends Component {
     const ingredientPrice = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice + ingredientPrice;
-    this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
+    this.setState({ totalPrice: newPrice.toFixed(2), ingredients: updatedIngredients });
     this.updatePurchaseState(updatedIngredients);
   }
 
@@ -69,7 +69,7 @@ class BurgerBuilder extends Component {
     const ingredientPrice = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - ingredientPrice;
-    this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
+    this.setState({ totalPrice: newPrice.toFixed(2), ingredients: updatedIngredients });
     this.updatePurchaseState(updatedIngredients);
   }
 
@@ -100,6 +100,7 @@ class BurgerBuilder extends Component {
           modalClosed={this.purchaseCancelHandler}>
           <OrderSummary 
             ingredients={this.state.ingredients}
+            price={this.state.totalPrice}
             purchaseCancelled={this.purchaseCancelHandler}
             purchaseContinued={this.purchaseContinueHandler}
             />
