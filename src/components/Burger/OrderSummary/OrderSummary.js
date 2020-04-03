@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Aux from '../../../hoc/Aux'
-
+import Aux from '../../../hoc/Aux';
+import Button from '../../UI/Button/Button';
 
 const orderSummary = (props) => {
   const ingredientSummary = Object.keys(props.ingredients)
     .map(ingredientKey => {
       return (
         <li key={ingredientKey}>
-          <span style={{textTransform: 'capital'}}>{ingredientKey}</span>: {props.ingredients[ingredientKey]}
+          <span style={{ textTransform: 'capital' }}>{ingredientKey}</span>: {props.ingredients[ingredientKey]}
         </li>
       );
     });
@@ -20,6 +20,8 @@ const orderSummary = (props) => {
         {ingredientSummary}
       </ul>
       <p>Continue to checkout</p>
+      <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
+      <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
     </Aux>
   );
 }
