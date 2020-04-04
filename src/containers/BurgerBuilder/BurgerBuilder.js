@@ -52,7 +52,7 @@ class BurgerBuilder extends Component {
     const ingredientPrice = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice + ingredientPrice;
-    this.setState({ totalPrice: newPrice.toFixed(2), ingredients: updatedIngredients });
+    this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
     this.updatePurchaseState(updatedIngredients);
   }
 
@@ -69,16 +69,16 @@ class BurgerBuilder extends Component {
     const ingredientPrice = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - ingredientPrice;
-    this.setState({ totalPrice: newPrice.toFixed(2), ingredients: updatedIngredients });
+    this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
     this.updatePurchaseState(updatedIngredients);
   }
 
   checkoutHandler = () => {
-    this.setState({checkoutClicked: true});
+    this.setState({ checkoutClicked: true });
   }
 
   purchaseCancelHandler = () => {
-    this.setState({checkoutClicked: false});
+    this.setState({ checkoutClicked: false });
   }
 
   purchaseContinueHandler = () => {
@@ -95,15 +95,15 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        
+
         <Modal show={this.state.checkoutClicked}
           modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary 
+          <OrderSummary
             ingredients={this.state.ingredients}
-            price={this.state.totalPrice}
+            price={this.state.totalPrice.toFixed(2)}
             purchaseCancelled={this.purchaseCancelHandler}
             purchaseContinued={this.purchaseContinueHandler}
-            />
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
@@ -112,7 +112,7 @@ class BurgerBuilder extends Component {
           disabled={disabledInfo}
           purchasable={this.state.purchasable}
           clicked={this.checkoutHandler}
-          price={this.state.totalPrice} />
+          price={this.state.totalPrice.toFixed(2)} />
       </Aux>
     );
   }
