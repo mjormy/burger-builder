@@ -27,6 +27,7 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     axios.get('/ingredients.json')
       .then(response => {
         this.setState({ ingredients: response.data });
@@ -91,29 +92,39 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     //alert('You continue');
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Ormycita',
-        address: {
-          street: 'Evaristo Lillo',
-          zipCode: '1700000',
-          country: 'CL'
-        },
-        email: 'ormy@test.com'
-      },
-      deliveryMethod: 'fastest'
-    };
-    axios.post('/orders.json', order)
-      .then(response => {
-        this.setState({ loading: false, checkoutClicked: false });
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({ loading: false, checkoutClicked: false });
-      });
+    // this.setState({ loading: true });
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Ormycita',
+    //     address: {
+    //       street: 'Evaristo Lillo',
+    //       zipCode: '1700000',
+    //       country: 'CL'
+    //     },
+    //     email: 'ormy@test.com'
+    //   },
+    //   deliveryMethod: 'fastest'
+    // };
+    // axios.post('/orders.json', order)
+    //   .then(response => {
+    //     this.setState({ loading: false, checkoutClicked: false });
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.setState({ loading: false, checkoutClicked: false });
+    //   });
+    const queryParams = [];
+    for (let ing in this.state.ingredients) {
+      queryParams.push(encodeURIComponent(ing) + '=' + encodeURIComponent(this.state.ingredients[ing]));
+    }
+    
+    const queryString = queryParams.join('&');
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?'+ queryString
+    });
   }
 
   render() {
