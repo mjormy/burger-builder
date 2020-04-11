@@ -21,7 +21,7 @@ const order = (props) => {
         border: '1px solid #ccc',
         padding: '5px'
       }}
-      key={ing.key}>{ing.name} ({ing.amount}) </span>);
+      key={ing.name}>{ing.name} ({ing.amount}) </span>);
   });
 
   return (
