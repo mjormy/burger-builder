@@ -4,6 +4,7 @@ import classes from './Input.module.css';
 
 const input = (props) => {
   let inputElement = null;
+  console.log(props.inputtype);
   switch (props.inputtype) {
     case ('input'):
       inputElement = <input className={classes.InputElement}

@@ -143,6 +143,7 @@ class ContactData extends Component {
         id: key,
         config: this.state.orderForm[key]
       });
+      console.log (this.state.orderForm[key]);
     }
     
     let form = (
@@ -152,7 +153,7 @@ class ContactData extends Component {
         {formElementsArray.map(formElement => (
           <Input 
             key={formElement.id}
-            elementType={formElement.config.elementType}
+            inputtype={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
             changed={(event) => this.inputChangedHandler(event, formElement.id)} />
